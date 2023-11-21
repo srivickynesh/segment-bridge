@@ -1,0 +1,9 @@
+FROM registry.k8s.io/kwok/cluster:v0.4.0-k8s.v1.27.3
+
+COPY --chmod=755 manage_kwok_cluster.sh /etc/manage_kwok_cluster.sh
+
+COPY --chmod=755 inittab /etc/inittab
+
+RUN kill -HUP 1 && KWOK_KUBE_APISERVER_PORT=0
+
+ENTRYPOINT ["/entrypoint.sh"]
